@@ -2,6 +2,20 @@ provider "aws" {
   region = "ap-northeast-1"
 }
 
+resource "aws_db_instance" "redash" {
+  identifier           = "redash"
+  engine               = "postgres"
+  engine_version       = "9.6"
+  name                 = "redash"
+  username             = "redash"
+  password             = "パスワード"
+  instance_class       = "db.t3.micro"
+  storage_type         = "gp2"
+  allocated_storage    = 10
+  parameter_group_name = "default.postgres9.6"
+  skip_final_snapshot  = true
+}
+
 resource "aws_elasticache_cluster" "redash" {
   cluster_id           = "redash"
   engine               = "redis"
